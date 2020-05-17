@@ -14,24 +14,32 @@
 <p>Total Score: <span th:text="${quiz.totalScore}"></span></p>
 <p>Questions:</p>
 <div>
-    <ul th:if="${not quiz.mcQuestions.isEmpty()}">
+    <ul>
+        <li th:each="question : ${quiz.selectQuestions}">
+            <p th:text="${question.question}"></p>
+            <div th:each="op, state : ${question.options}">
+                <input disabled type="checkbox" th:name="'selectQuestion' + ${question.id}" th:value="${op.id}"
+                th:checked="${#strings.contains(question.answer, op.id)}">
+
+                <span th:text="${alphabet[state.index]} + '. '"></span><span th:text="${op.option}"></span>
+                <br>
+            </div>
+            <a th:href="'/editMcQuestion?qid=' + ${question.id}">Edit</a>
+        </li>
+
         <li th:each="question : ${quiz.mcQuestions}">
             <p th:text="${question.question}"></p>
-            <div th:if="${question.questionType == 1}">
-                <div th:each="op, state : ${question.options}">
-                    <input disabled type="radio" th:name="'question' + ${question.id}" th:value="${op.id}" th:checked="${question.correctAnswer == op.id}">
+            <div th:each="op, state : ${question.options}">
+                <input disabled type="radio" th:name="'mcQuestion' + ${question.id}" th:value="${op.id}" th:checked="${question.correctAnswer == op.id}">
 
-                    <span th:text="${alphabet[state.index]} + '. '"></span><span th:text="${op.option}"></span>
-                    <br>
-                </div>
-                <a th:href="'/editMcQuestion?qid=' + ${question.id}">Edit</a>
+                <span th:text="${alphabet[state.index]} + '. '"></span><span th:text="${op.option}"></span>
+                <br>
             </div>
-            <div th:if="${question.questionType == 2}">
-
-            </div>
+            <a th:href="'/editMcQuestion?qid=' + ${question.id}">Edit</a>
         </li>
     </ul>
-    <p style="color: red" th:if="${quiz.mcQuestions.isEmpty()}">There's no question!</p>
+
+    <p style="color: red" th:if="${quiz.mcQuestions.isEmpty() and quiz.selectQuestions.isEmpty()}">There's no question!</p>
 </div>
 <a th:href="'/selectQuestionType?qid=' + ${quiz.id}">Add question</a>
 

@@ -3,6 +3,7 @@ package com.system.exam.exam.controllers;
 import com.system.exam.exam.entities.MCQuestion;
 import com.system.exam.exam.entities.QuestionType;
 import com.system.exam.exam.entities.Quiz;
+import com.system.exam.exam.entities.SelectQuestion;
 import com.system.exam.exam.services.QuestionTypeService;
 import com.system.exam.exam.services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +48,18 @@ public class QuestionTypeController {
         }
 
         model.addAttribute("quiz", quiz);
-        MCQuestion mcQuestion = new MCQuestion();
-        mcQuestion.setQuiz(quiz);
-        model.addAttribute("question", mcQuestion);
         model.addAttribute("questionType", questionType);
 
         if(questionType == 1){
+            MCQuestion mcQuestion = new MCQuestion();
+            mcQuestion.setQuiz(quiz);
+            model.addAttribute("mcQuestion", mcQuestion);
             return "createMcQuestion";
         }
         else if(questionType == 2){
+            SelectQuestion selectQuestion = new SelectQuestion();
+            selectQuestion.setQuiz(quiz);
+            model.addAttribute("selectQuestion", selectQuestion);
             return "createSelectQuestion";
         }
         else{

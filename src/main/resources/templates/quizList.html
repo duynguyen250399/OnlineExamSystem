@@ -15,7 +15,7 @@
         <a th:href="'quiz/' + ${quiz.id}" th:text="${quiz.title}"></a><br>
         <small>Time: <span th:text="${quiz.time}"></span> seconds</small><br>
         <small>Total Score: <span th:text="${quiz.totalScore}"></span></small><br>
-        <small>Number of questions: <span th:text="${quiz.mcQuestions.size()}"></span></small>
+        <small>Number of questions: <span th:text="${quiz.mcQuestions.size() + quiz.selectQuestions.size()}"></span></small>
     </li>
 </ul>
 <p th:if="${quizList.isEmpty()}">There's no quiz!</p>

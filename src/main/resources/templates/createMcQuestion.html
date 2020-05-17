@@ -11,7 +11,7 @@
 <body>
 <h1>Create MC Question</h1>
 <h2>Quiz: <spaan th:text="${quiz.title}"></spaan></h2>
-<form action="/createMcQuestion" method="post" id="form" th:object="${question}">
+<form action="/createQuestion" method="post" id="form" th:object="${mcQuestion}">
     <input type="hidden" name="qid" th:value="${quiz.id}">
     <input type="hidden" name="qtype" th:value="${questionType}">
     <label>Question:</label>

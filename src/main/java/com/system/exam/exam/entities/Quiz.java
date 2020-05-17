@@ -14,6 +14,8 @@ public class Quiz {
     private double totalScore;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quiz")
     private List<MCQuestion> mcQuestions;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "quiz")
+    private List<SelectQuestion> selectQuestions;
 
     public int getId() {
         return id;
@@ -53,5 +55,13 @@ public class Quiz {
 
     public void setMcQuestions(List<MCQuestion> mcQuestions) {
         this.mcQuestions = mcQuestions;
+    }
+
+    public List<SelectQuestion> getSelectQuestions() {
+        return selectQuestions;
+    }
+
+    public void setSelectQuestions(List<SelectQuestion> selectQuestions) {
+        this.selectQuestions = selectQuestions;
     }
 }
