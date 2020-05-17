@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<h3 th:text="${quiz.title}"></h3>
+<p>Time: <span th:text="${quiz.time}"></span> seconds</p>
+<p>Total Score: <span th:text="${quiz.totalScore}"></span></p>
+<p>Questions:</p>
+<div>
+    <ul th:if="${not quiz.mcQuestions.isEmpty()}">
+        <li th:each="question : ${quiz.mcQuestions}">
+            <p th:text="${question.question}"></p>
+            <div th:if="${question.questionType == 1}">
+                <div th:each="op, state : ${question.options}">
+                    <input disabled type="radio" th:name="'question' + ${question.id}" th:value="${op.id}" th:checked="${question.correctAnswer == op.id}">
+
+                    <span th:text="${alphabet[state.index]} + '. '"></span><span th:text="${op.option}"></span>
+                    <br>
+                </div>
+                <a th:href="'/editMcQuestion?qid=' + ${question.id}">Edit</a>
+            </div>
+            <div th:if="${question.questionType == 2}">
+
+            </div>
+        </li>
+    </ul>
+    <p style="color: red" th:if="${quiz.mcQuestions.isEmpty()}">There's no question!</p>
+</div>
+<a th:href="'/selectQuestionType?qid=' + ${quiz.id}">Add question</a>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
