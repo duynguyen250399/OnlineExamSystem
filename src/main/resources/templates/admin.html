@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
 </head>
 <body>
+<h3>Admin page</h3>
 <a href="/logout" th:if="${userDetails}">Logout</a><br>
-<a href="/login" th:if="not ${userDetails}">Login</a><br>
-<a href="/register" th:if="not ${userDetails}">Register</a><br>
-
+<a href="/admin/createQuizPage">Create new quiz</a><br>
+<a href="/admin/quiz">View quiz list</a><br>
 </body>
 </html>

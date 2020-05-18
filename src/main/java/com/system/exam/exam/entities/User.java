@@ -1,9 +1,7 @@
 package com.system.exam.exam.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -13,6 +11,8 @@ public class User {
     private String username;
     private String hashedPassword;
     private String fullName;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
 
     public int getId() {
         return id;
@@ -44,5 +44,13 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
